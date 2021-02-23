@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Transacao } from './extrato.interfaces';
 import { ExtratoService } from './extrato.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ExtratoService } from './extrato.service';
 })
 export class ExtratoComponent implements OnInit {
 
-  transacoes:any;
+  transacoes!: Transacao[];
 
   constructor(
      private extratoService: ExtratoService
