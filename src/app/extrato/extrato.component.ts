@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { finalize } from 'rxjs/operators';
 
 import { Transacao } from './extrato.interfaces';
 import { ExtratoService } from './extrato.service';
+
 
 @Component({
   selector: 'app-extrato',
@@ -28,15 +30,22 @@ export class ExtratoComponent implements OnInit {
     this.erroNoCarregamento = false;
 
     this.extratoService.getTransacoes()
+    .pipe(
+      finalize(() => this.estaCarregando = false)
+    )
     .subscribe(
-      response => {
-      this.estaCarregando = false;
-      this.transacoes = response;
-    },
-    error => {
-      this.estaCarregando = false;
-      this.erroNoCarregamento = true;
-    });
+      response => this.onSuccess(response),
+      error => this.onError(error),
+    );
   }
 
-}
+  onSuccess(response: Transacao[]){
+    this.transacoes = response;
+    }
+
+  onError(error:any) {
+    this.erroNoCarregamento = true;
+    console.error(error);
+  }
+
+ }

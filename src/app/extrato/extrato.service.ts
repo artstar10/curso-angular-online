@@ -15,7 +15,12 @@ export class ExtratoService {
     private http: HttpClient
   ) { }
   getTransacoes() {
-  // return throwError(new Error('Erro genérico.'));
+    //==========SIMULAR ERRO==========================
+    // const error = throwError('Erro genérico');
+    // return timer(3000).pipe(mergeMap(() => error));
+    //================================================//
+
+    // return throwError(new Error('Erro genérico.'));
   //return this.http.get<Transacao[]>(`${this.API_URL}/transacoes`); // VERSÃO COM TEMPLATE STRING
   return this.http.get<Transacao[]>(this.API_URL + '/transacoes');
   }
