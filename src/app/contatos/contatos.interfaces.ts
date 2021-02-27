@@ -1,5 +1,5 @@
 export interface Contato {
-  id: number;
+  id: string;
   nome: string;
   cpf: string;
   banco: number;
