@@ -3,11 +3,17 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form-singin pt-5">
 
     <div class="p-2">
-      <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email">
+      <input 
+      type="email" class="form-control"
+      placeholder="Email" name="email" 
+      [(ngModel)]="email" required email>
     </div>
 
     <div class="p-2">
-      <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password">
+      <input 
+      type="password" 
+      class="form-control" placeholder="Password" name="password" 
+      [(ngModel)]="password" required> 
     </div>
 
     <div class="p-2">
