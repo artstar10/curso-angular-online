@@ -7,7 +7,7 @@
         type="email" class="form-control"
         placeholder="Email" name="email"
         [(ngModel)]="email" required email
-        [class.is-invalid]="exibeErro('email', form)">
+        [class.is-invalid]="exibeErro('email', form)" #emailInput>
         <div *ngIf="exibeErro('email', form)" class="invalid-feedback"> E-mail Inválido. </div>
     </div>
 
@@ -16,7 +16,7 @@
         type="password" class="form-control"
         placeholder="Password" name="password"
         [(ngModel)]="password" required
-        [class.is-invalid]="exibeErro('password', form)">
+        [class.is-invalid]="exibeErro('password', form)" #passwordInput>
         <div *ngIf="exibeErro('password', form)" class="invalid-feedback"> Password Inválido. </div>
     </div>
 
