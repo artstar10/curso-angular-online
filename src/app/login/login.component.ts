@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { pipe } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { LoginService } from './login.service';
 
 @Component({
@@ -15,11 +17,17 @@ export class LoginComponent {
   email!: string;
   password!: string;
 
+
+  estaCarregando!: boolean;
+  erroNoLogin!: boolean;
+
   constructor(
     private loginService: LoginService,
   ) {}
 
   onSubmit (form: any) {
+    this.erroNoLogin = false;
+
     if(!form.valid) {
       form.controls.email.markAsTouched();
       form.controls.password.markAsTouched();
@@ -40,14 +48,19 @@ export class LoginComponent {
     this.login();
   }
 
-
   login(){
+    this.estaCarregando = true;
+
     this.loginService.logar(this.email, this.password)
-     .subscribe(
+    .pipe(
+      finalize(() => this.estaCarregando = false)
+    )
+    .subscribe(
        response => {
          console.log('Sucesso! Logou!');
        },
        error => {
+         this.erroNoLogin = true;
          console.log('Deu ruim! Não logou');
        }
      )
